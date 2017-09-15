@@ -67,13 +67,15 @@
     <param.net.tsa.namespace />
     <param.net.tsa.superclass>Class1</param.net.tsa.superclass>
     <param.net.tsa.metadata />
-    <param.net.tsa.metadata.assembly>/home/whj</param.net.tsa.metadata.assembly>
+    <param.net.tsa.metadata.assembly>/home/whj/catkin_ws</param.net.tsa.metadata.assembly>
     <param.net.saved.interface />
     <unset>
       <param.icon />
       <param.icons />
       <param.version />
+      <param.authnamewatermark />
       <param.email />
+      <param.company />
       <param.summary />
       <param.description />
       <param.screenshot />
@@ -126,7 +128,9 @@
       </entity.package>
     </fileset.classes>
     <fileset.resources />
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/temp.png</file>
+    </fileset.depfun>
     <fileset.package />
     <build-deliverables>
       <file location="${PROJECT_ROOT}/th_distribution/for_testing" name="th_distribution.jar" optional="false">/home/whj/gitrepo/matlab_prj/th_distribution/th_distribution/for_testing/th_distribution.jar</file>
@@ -166,7 +170,7 @@
       <vista>false</vista>
       <linux>true</linux>
       <solaris>false</solaris>
-      <osver>4.4.0-79-generic</osver>
+      <osver>4.4.0-83-generic</osver>
       <os32>false</os32>
       <os64>true</os64>
       <arch>glnxa64</arch>

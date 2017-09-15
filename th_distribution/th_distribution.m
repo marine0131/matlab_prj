@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %结合机房地图的温度分布图
 %t_h: 温度('t')or湿度('h')
-%inputMat:输入数据, (x,y,t), unit:mm
+%inputMat:输入数据, (x,y,t)
 %limit:温湿度分布上下限，(min max),limit区间越小，不同温湿度间的颜色区分越明显
 %temp_map:临时生成文件目录和文件名'./temp.png'
 %room_map:机房地图字段,'room_map.png'
@@ -26,7 +26,7 @@ else
         end
     end
     if ~exist('temp_map','var')
-        temp_map='temp.png';
+        temp_img='temp.png';
     end
     if ~exist('output_path','var')
         output_path='.';
@@ -51,14 +51,12 @@ else
 % z=[10,20,22,24,30];
 % temp ='temp.png'
 % limit = [10 50]
-im_src = room_map;
+
 x=inputMat(:,1);
 y=inputMat(:,2);
 z=inputMat(:,3);
-temp = temp_img;
 
-
-[I1,none1,none2] =imread(im_src); %read room map image
+[I1,~,~] =imread(room_map); %read room map image
 map_size = size(I1);%map size (rows,cols,color)
 idx1 = ones(map_size(1),map_size(2));
 %idx2 = ones(m, n);
@@ -72,22 +70,39 @@ trans_val = idx1;
 %imwrite( RGB_in, im_out, 'png', 'Alpha', trans_val );
 
 [X,Y,Z] = griddata(x,y,z,linspace(min(x),max(x),100)',linspace(min(y),max(y),100),'v4');%v4 nterpolation, generate matrix
+Z(Z>max(z))=max(z);
+Z(Z<min(z))=min(z);
 figure('visible','off'); %do not show figure
-hs = surf(X,Y,Z);%surface
-colormap jet;shading interp;
+surf(X,Y,Z);%surface
+aa = zeros(30,3);
+aa(:,3)=1;
+aa(:,2)=linspace(0,1,30);
+myjet = aa;
+aa(:,1)=linspace(0,1,30);
+aa(:,2)=1;
+aa(:,3)=linspace(1,0,30);
+myjet = [myjet;aa];
+aa(:,1)=1;
+aa(:,2)=linspace(1,0,30);
+aa(:,3)=0;
+myjet = [myjet;aa];
+colormap(myjet);
+shading interp;
 caxis(limit);
 xlim([0 map_size(2)]);
 ylim([0 map_size(1)]);
 axis off;
 % set(hs,'FaceAlpha',0.8); %set transparent
 view(0,90); %perspective
+%colorbar('position',[0.95 0.1 1.0 0.8])
 %set(gcf,'Position',[100 10 800 600]);%set image size   
 set(gca,'Units','normalized','Position',[0 0 1 1]); %save plot without blank
 set(gca,'YDir','reverse')%reverse the y axis
 set(gcf,'PaperUnits','inches','PaperPosition',[0 0 map_size(2)/75 map_size(1)/75]);
-print(gcf,'-dpng','-r75',temp);
+%mycmap=get(gcf,'colormap');
+print(gcf,'-dpng','-r75',temp_img);
 
-I2=imread(temp);
+I2=imread(temp_img);
 imshow(I2); %show room map
 
 % [ROOM_X,ROOM_Y]=meshgrid(1:size(ROOM,1),1:size(ROOM,2));
@@ -104,12 +119,16 @@ imshow(I2); %show room map
 hold on
 h=imshow(I1);
 set(h,'AlphaData',trans_val);%set room map transparent color
-
+hold off
 if ~exist(output_path,'dir') 
     mkdir(output_path)   %create a path if the path not exist
 end 
 mypath = [output_path,'\'];
 mypath = [mypath,output_name];%assemble path and filename
 saveas(gcf,mypath);%save figure to mypath
+
+close all;
+clear x y z X Y Z I2 h;
+
 result = 'success';
 end
