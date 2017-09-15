@@ -1,6 +1,6 @@
 /*
  * MATLAB Compiler: 6.3 (R2016b)
- * Date: Fri Sep 15 13:17:22 2017
+ * Date: Fri Sep 15 15:06:10 2017
  * Arguments: "-B" "macro_default" "-W" "java:th_distribution,Class1" "-T" "link:lib" 
  * "-d" "/home/whj/gitrepo/matlab_prj/th_distribution/th_distribution/for_testing" 
  * "class{Class1:/home/whj/gitrepo/matlab_prj/th_distribution/th_distribution.m}" 

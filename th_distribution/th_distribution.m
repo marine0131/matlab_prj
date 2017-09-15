@@ -128,7 +128,7 @@ mypath = [mypath,output_name];%assemble path and filename
 saveas(gcf,mypath);%save figure to mypath
 
 close all;
-clear x y z X Y Z I2 h;
+clear x y z I1 map_size idx1 trans_val X Y Z aa my_jet I2 h;
 
 result = 'success';
 end

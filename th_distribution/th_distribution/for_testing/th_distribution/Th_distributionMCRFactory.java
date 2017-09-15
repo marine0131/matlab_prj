@@ -1,6 +1,6 @@
 /*
  * MATLAB Compiler: 6.3 (R2016b)
- * Date: Fri Sep 15 13:17:22 2017
+ * Date: Fri Sep 15 15:06:10 2017
  * Arguments: "-B" "macro_default" "-W" "java:th_distribution,Class1" "-T" "link:lib" 
  * "-d" "/home/whj/gitrepo/matlab_prj/th_distribution/th_distribution/for_testing" 
  * "class{Class1:/home/whj/gitrepo/matlab_prj/th_distribution/th_distribution.m}" 
@@ -19,7 +19,7 @@ public class Th_distributionMCRFactory
    
     
     /** Component's uuid */
-    private static final String sComponentId = "th_distribut_F50D9A9C6A62A746FBA1DA3F5AD06DED";
+    private static final String sComponentId = "th_distribut_2A438EE485CAE1C690F24C98CBB267EE";
     
     /** Component name */
     private static final String sComponentName = "th_distribution";
